@@ -6,7 +6,6 @@ file_path = os.path.join("Resources", "election_results.csv")
 
 
 total_votes = 0
-
 candidate_votes = {}
 
 # Open election data file
@@ -16,7 +15,7 @@ with open(file_path, 'r') as election_data:
 
     # Skip header row
     header = next(file_reader)
-    print(header)
+    #print(header)
 
     for row in file_reader:
 
@@ -35,8 +34,8 @@ with open(file_path, 'r') as election_data:
         candidate_votes[candidate]['percentage'] = float(candidate_votes[candidate]['votes']) / float(total_votes) * 100
 
 # print candidate data
-for candidate in candidate_votes:
-    print(f"{candidate}: {candidate_votes[candidate]['percentage']:.1f}% ({candidate_votes[candidate]['votes']:,})")
+#for candidate in candidate_votes:
+#    print(f"{candidate}: {candidate_votes[candidate]['percentage']:.1f}% ({candidate_votes[candidate]['votes']:,})")
 
 winning_candidate = {'name': '', 'votes': 0, 'percentage': 0}
 
@@ -54,14 +53,31 @@ winning_candidate_summary = (
     f"Winning Percentage: {winning_candidate['percentage']:.1f}%\n"
     f"-------------------------\n")
 
-print(winning_candidate_summary)
+#print(winning_candidate_summary)
 
 file_path_results = os.path.join("Analysis", "election_anaylsis.txt")
 
 # Open election anaylsis file
 with open(file_path_results, "w") as election_results:
 
-    election_results.write("Arapahoe\nDenver\nJefferson")
-    
+    results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(results, end="")
+    # Save the final vote count to the text file.
+    election_results.write(results)
 
+    for candidate in candidate_votes:
+        candidate_result = (
+            f"{candidate}: {candidate_votes[candidate]['percentage']:.1f}% ({candidate_votes[candidate]['votes']:,})\n"
+        )
+        print(candidate_result)
+        election_results.write(candidate_result)
+    
+    election_results.write(f"-------------------------\n")
+
+    print(winning_candidate_summary)
+    election_results.write(winning_candidate_summary)
     #print(election_results)
