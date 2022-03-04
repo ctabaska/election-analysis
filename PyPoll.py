@@ -4,7 +4,6 @@ import os
 # Create filepath variable
 file_path = os.path.join("Resources", "election_results.csv")
 
-
 total_votes = 0
 candidate_votes = {}
 
@@ -33,10 +32,6 @@ with open(file_path, 'r') as election_data:
     for candidate in candidate_votes:
         candidate_votes[candidate]['percentage'] = float(candidate_votes[candidate]['votes']) / float(total_votes) * 100
 
-# print candidate data
-#for candidate in candidate_votes:
-#    print(f"{candidate}: {candidate_votes[candidate]['percentage']:.1f}% ({candidate_votes[candidate]['votes']:,})")
-
 winning_candidate = {'name': '', 'votes': 0, 'percentage': 0}
 
 # Find winner
@@ -52,8 +47,6 @@ winning_candidate_summary = (
     f"Winning Vote Count: {winning_candidate['votes']:,}\n"
     f"Winning Percentage: {winning_candidate['percentage']:.1f}%\n"
     f"-------------------------\n")
-
-#print(winning_candidate_summary)
 
 file_path_results = os.path.join("Analysis", "election_anaylsis.txt")
 
